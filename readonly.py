@@ -4,19 +4,17 @@ import sublime_plugin
 
 class ToggleReadonlyModeCommand(sublime_plugin.TextCommand):
   def run(self, edit):
-    if (self.view.is_read_only()):
+    if self.view.is_read_only():
       self.view.set_read_only(False)
-      self.view.set_status('read_only_mode', 'writeable')
-      self.view.window().status_message("View " + str(self.view.file_name()) + " is writeable.")
+      self.view.erase_status('read_only_mode')
     else:
       self.view.set_read_only(True)
-      self.view.set_status('read_only_mode', 'readonly')
-      self.view.window().status_message("View " + str(self.view.file_name()) + " is readonly.")
-
+      self.view.set_status('read_only_mode', 'ReadOnly')
 
 class ToggleReadonlyListener(sublime_plugin.EventListener):
-   def on_load(self, view):
-      if view.settings().get('read_only_mode'):
-        view.set_read_only(True)
-        view.set_status('read_only_mode', 'readonly')
-        view.window().status_message("View " + str(view.file_name()) + " is readonly.")
+  def on_load_async(self, view):
+    if view.is_read_only():
+      view.set_status('read_only_mode', 'ReadOnly')
+    elif view.settings().get('read_only_mode'):
+       view.set_read_only(True)
+       view.set_status('read_only_mode', 'ReadOnly')
