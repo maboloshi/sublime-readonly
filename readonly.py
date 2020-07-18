@@ -11,6 +11,9 @@ class ToggleReadonlyModeCommand(sublime_plugin.TextCommand):
       self.view.set_read_only(True)
       self.view.set_status('read_only_mode', 'ReadOnly')
 
+  def is_checked(self):
+    return self.view.is_read_only()
+
 class ToggleReadonlyListener(sublime_plugin.EventListener):
   def on_load_async(self, view):
     if view.is_read_only():

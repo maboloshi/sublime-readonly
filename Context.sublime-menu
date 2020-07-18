@@ -1,6 +1,6 @@
 [
   {
-    "caption": "Toggle Readonly mode",
+    "caption": "Read-Only Locked",
     "command": "toggle_readonly_mode",
     "id": "readonly"
   }
