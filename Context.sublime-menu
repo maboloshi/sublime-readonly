@@ -1,4 +1,5 @@
 [
+  { "caption": "-", "id": "file" },  
   {
     "caption": "Read-Only Locked",
     "command": "toggle_readonly_mode",
